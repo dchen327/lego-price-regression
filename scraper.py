@@ -11,20 +11,16 @@ API_KEY = '3-7NSU-8Pqh-eDwah'
 USER_HASH = 'krrngmEXdD'
 
 
-
-
 def get_theme_names():
     with open('themes.json') as f:
-    themes = json.load(f)['themes']
+        themes = json.load(f)['themes']
 
     theme_names = []
     total_sets = 0
-    c = 0
     for theme in themes:
         total_sets += theme['setCount']
         theme_names.append(theme['theme'])
-        c += 1
-    
+
     return theme_names
 
 
@@ -40,7 +36,7 @@ def get_sets_by_theme(theme_name):
 
 def get_all_sets():
     sets = []
-    for theme_name in theme_names:
+    for theme_name in get_theme_names():
         ic(theme_name)
         sets.append(get_sets_by_theme(theme_name))
         break
