@@ -6,7 +6,8 @@ LICENSED = ['Avatar The Last Airbender', 'Batman', 'Brick Sketches', 'BrickHeadz
             'Speed Champions', 'Spider-Man', 'SpongeBob SquarePants', 'Star Wars', 'Stranger Things', 'Super Mario', 'Teenage Mutant Ninja Turtles', 'The Angry Birds Movie', 'The Hobbit', 'The LEGO Batman Movie', 'The LEGO Movie', 'The LEGO Movie 2', 'The LEGO Ninjago Movie', 'The Lone Ranger', 'The Lord of the Rings', 'The Powerpuff Girls', 'The Simpsons', 'Toy Story', 'Trolls World Tour', 'Unikitty', 'Vidiyo']
 
 
-# API_KEY = '3-7NSU-8Pqh-eDwah'
+API_KEY = '3-7NSU-8Pqh-eDwah'
+USER_HASH = 'krrngmEXdD'
 # method = 'getThemes'
 # URL = f'https://brickset.com/api/v3.asmx/{method}?apiKey={API_KEY}'
 
@@ -18,9 +19,15 @@ LICENSED = ['Avatar The Last Airbender', 'Batman', 'Brick Sketches', 'BrickHeadz
 with open('themes.json') as f:
     themes = json.load(f)['themes']
 
+total_sets = 0
 c = 0
 for theme in themes:
-    if theme['setCount'] > 20 and theme['yearTo'] > 2020:
-        c += 1
-        print(theme['theme'])
-print(c)
+    total_sets += theme['setCount']
+    c += 1
+print(total_sets)
+
+method = 'getSets'
+params = json.dumps({'theme': 'Technic'})
+URL = f'https://brickset.com/api/v3.asmx/{method}?apiKey={API_KEY}&userHash={USER_HASH}&params={params}'
+r = requests.get(URL)
+print(r.json())

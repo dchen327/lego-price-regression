@@ -11,6 +11,7 @@ Theme grouped categories here: https://brickset.com/browse/sets
 - age range
 - number of minifigures
 - packaging type
+- length of instructions?
 
 - themes? group by category?
 
