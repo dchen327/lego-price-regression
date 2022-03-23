@@ -59,8 +59,15 @@ def get_all_sets():
 
 # print(get_theme_names()[60:80])
 
-sets = load_sets()
-for theme in sets:
-    for set_ in theme:
-        print(set_)
-        quit()
+def create_df():
+    sets = []
+
+    sets_by_theme = load_sets()[:10]
+    for theme in sets_by_theme:
+        for set_ in theme:
+            sets.append(set_)
+
+    print(sets)
+
+
+create_df()
