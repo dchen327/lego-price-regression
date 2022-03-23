@@ -27,19 +27,19 @@ def get_theme_names():
 def get_sets_by_theme(theme_name):
 
     method = 'getSets'
-    params = json.dumps({'theme': 'theme_name'})
+    params = json.dumps({'theme': theme_name})
     URL = f'https://brickset.com/api/v3.asmx/{method}?apiKey={API_KEY}&userHash={USER_HASH}&params={params}'
     r = requests.get(URL)
-    print(r.json())
+    ic(len(r.json()['sets']))
     return r.json()['sets']
 
 
 def get_all_sets():
     sets = []
-    for theme_name in get_theme_names():
+    theme_names = get_theme_names()
+    for theme_name in theme_names[:20]:
         ic(theme_name)
         sets.append(get_sets_by_theme(theme_name))
-        break
 
     with open('sets.json', 'w') as f:
         f.write(json.dumps(sets))
