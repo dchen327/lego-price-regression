@@ -58,3 +58,9 @@ def get_all_sets():
 # get_all_sets()
 
 # print(get_theme_names()[60:80])
+
+sets = load_sets()
+for theme in sets:
+    for set_ in theme:
+        print(set_)
+        quit()
