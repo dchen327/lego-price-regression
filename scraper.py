@@ -34,14 +34,14 @@ def get_sets_by_theme(theme_name):
     return r.json()['sets']
 
 
-# first 60 done
+# first 80 done
 
 def get_all_sets():
     with open('sets.json') as f:
         sets = json.load(f)
 
     theme_names = get_theme_names()
-    for theme_name in theme_names[60:80]:
+    for theme_name in theme_names[80:100]:
         ic(theme_name)
         sets.append(get_sets_by_theme(theme_name))
 
@@ -51,4 +51,6 @@ def get_all_sets():
     return sets
 
 
-get_all_sets()
+# get_all_sets()
+
+print(get_theme_names()[60:80])
