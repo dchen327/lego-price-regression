@@ -69,6 +69,8 @@ def create_df():
             sets.append(set_)
 
     df = pd.DataFrame(sets)
+    df['licensed'] = df['name'].apply(lambda x: x in LICENSED)
+
     print(df.head())
 
 
