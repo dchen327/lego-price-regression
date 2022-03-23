@@ -1,6 +1,7 @@
 import json
 import requests
 from icecream import ic
+import pandas as pd
 
 # pulled from set categories
 LICENSED = ['Avatar The Last Airbender', 'Batman', 'Brick Sketches', 'BrickHeadz', 'Cars', 'DC Comics Super Heroes', 'DC Super Hero Girls', 'Disney', 'Galidor', 'Ghostbusters', 'Harry Potter', 'Horizon', 'Indiana Jones', 'Jurassic World', 'Marvel Super Heroes', 'Minecraft', 'Minions: The Rise of Gru', 'Mixels', 'Overwatch', 'Pirates of the Caribbean', 'Prince of Persia', 'Scooby-Doo',
@@ -67,7 +68,8 @@ def create_df():
         for set_ in theme:
             sets.append(set_)
 
-    print(sets)
+    df = pd.DataFrame(sets)
+    print(df.head())
 
 
 create_df()
