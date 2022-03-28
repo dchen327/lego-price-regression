@@ -19,16 +19,14 @@ def get_theme_names():
     theme_names = []
     total_sets = 0
     for theme in themes:
-        if theme['setCount'] > 50:
+        if theme['setCount'] > 30:
             total_sets += theme['setCount']
             theme_names.append(theme['theme'])
 
-    ic(len(theme_names))
-    ic(total_sets)
+    # ic(len(theme_names))
+    # ic(total_sets)
+
     return theme_names
-
-
-get_theme_names()
 
 
 def get_sets_by_theme(theme_name):
@@ -56,21 +54,21 @@ def load_sets():
 # first 80 done
 
 
-# def get_all_sets():
-#     sets = load_sets()
+def get_all_sets():
+    sets = []
 
-#     theme_names = get_theme_names()
-#     for theme_name in theme_names[100:]:
-#         ic(theme_name)
-#         sets.append(get_sets_by_theme(theme_name))
+    theme_names = get_theme_names()
+    for theme_name in theme_names:
+        ic(theme_name)
+        sets.append(get_sets_by_theme(theme_name))
 
-#     with open('sets.json', 'w') as f:
-#         f.write(json.dumps(sets))
+    with open('sets.json', 'w') as f:
+        f.write(json.dumps(sets))
 
-#     return sets
+    return sets
 
 
-# print(get_theme_names()[60:80])
+get_all_sets()
 
 
 def create_df():
