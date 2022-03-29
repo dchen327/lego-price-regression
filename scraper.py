@@ -13,16 +13,20 @@ USER_HASH = 'krrngmEXdD'
 
 
 def get_theme_names():
+    ignore = ['Books', 'Collectable Minifigures',
+              'Duplo', 'Gear', 'Service Packs']
     with open('themes.json') as f:
         themes = json.load(f)['themes']
 
     theme_names = []
     total_sets = 0
     for theme in themes:
-        if theme['setCount'] > 30:
+        theme_name = theme['theme']
+        if theme_name not in ignore and theme['setCount'] > 30:
             total_sets += theme['setCount']
-            ic(theme['theme'], theme['setCount'])
-            theme_names.append(theme['theme'])
+            if theme['setCount'] >= 300:
+                ic(theme_name, theme['setCount'])
+            theme_names.append(theme_name)
 
     # ic(total_sets)
 
@@ -50,8 +54,11 @@ def load_sets():
 # c = 0
 # sets = load_sets()
 # for theme in sets:
+#     set_ct = 0
 #     for set_ in theme:
-#         c += 1
+#         set_ct += 1
+#     ic(set_ct)
+#     c += set_ct
 
 # ic(c)
 
@@ -68,6 +75,10 @@ def load_sets():
 #         f.write(json.dumps(sets))
 
 #     return sets
+
+
+def grab_missing_data():
+    gt_500 = ['City', 'Promotional', 'Star Wars', 'Town']
 
 
 def create_df():

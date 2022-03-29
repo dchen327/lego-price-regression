@@ -20,4 +20,4 @@ Theme grouped categories here: https://brickset.com/browse/sets
 
 # API data pulling
 - separate by date to get all data per page?
-- get rid of GEAR (keychains/accessories), Duplo (pieces too big)
+- get rid of GEAR (keychains/accessories), Duplo (pieces too big), Books (not Legos), Collectable Minifigures, Service Packs (motors, etc.)
