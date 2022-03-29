@@ -17,3 +17,7 @@ Theme grouped categories here: https://brickset.com/browse/sets
 
 # Questions
 - licensed vs. unlicensed? (from grouped categories)
+
+# API data pulling
+- separate by date to get all data per page?
+- get rid of GEAR (keychains/accessories), Duplo (pieces too big)

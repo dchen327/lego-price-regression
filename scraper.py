@@ -21,12 +21,15 @@ def get_theme_names():
     for theme in themes:
         if theme['setCount'] > 30:
             total_sets += theme['setCount']
+            ic(theme['theme'], theme['setCount'])
             theme_names.append(theme['theme'])
 
-    # ic(len(theme_names))
     # ic(total_sets)
 
     return theme_names
+
+
+get_theme_names()
 
 
 def get_sets_by_theme(theme_name):
@@ -39,7 +42,7 @@ def get_sets_by_theme(theme_name):
 
 
 def load_sets():
-    with open('sets.json') as f:
+    with open('all_sets.json') as f:
         return json.load(f)
 
 
@@ -47,28 +50,24 @@ def load_sets():
 # c = 0
 # sets = load_sets()
 # for theme in sets:
-#     ic(len(theme))
 #     for set_ in theme:
 #         c += 1
 
-# first 80 done
+# ic(c)
 
 
-def get_all_sets():
-    sets = []
+# def get_all_sets():
+#     sets = []
 
-    theme_names = get_theme_names()
-    for theme_name in theme_names:
-        ic(theme_name)
-        sets.append(get_sets_by_theme(theme_name))
+#     theme_names = get_theme_names()
+#     for theme_name in theme_names:
+#         ic(theme_name)
+#         sets.append(get_sets_by_theme(theme_name))
 
-    with open('sets.json', 'w') as f:
-        f.write(json.dumps(sets))
+#     with open('sets.json', 'w') as f:
+#         f.write(json.dumps(sets))
 
-    return sets
-
-
-get_all_sets()
+#     return sets
 
 
 def create_df():
@@ -82,7 +81,7 @@ def create_df():
     df = pd.DataFrame(sets)
     df['licensed'] = df['name'].apply(lambda x: x in LICENSED)
 
-    # print(df.head())
+    print(df.head())
 
 
-# create_df()
+create_df()
