@@ -33,7 +33,7 @@ def get_theme_names():
     return theme_names
 
 
-get_theme_names()
+# get_theme_names()
 
 
 def get_sets_by_theme(theme_name):
@@ -46,7 +46,7 @@ def get_sets_by_theme(theme_name):
 
 
 def load_sets():
-    with open('all_sets.json') as f:
+    with open('sets.json') as f:
         return json.load(f)
 
 
@@ -79,15 +79,42 @@ def load_sets():
 
 def grab_missing_data():
     gt_500 = ['City', 'Promotional', 'Star Wars', 'Town']
+    sets1 = load_sets()
+    new_sets = []
+    for set_ in sets1:
+        theme_name = set_[0]['theme']
+        if theme_name not in gt_500:
+            new_sets.append(set_)
+        else:
+            new_set = []
+            method = 'getSets'
+            params = json.dumps(
+                {'theme': theme_name, 'pageSize': 500, 'pageNumber': 1})
+            URL = f'https://brickset.com/api/v3.asmx/{method}?apiKey={API_KEY}&userHash={USER_HASH}&params={params}'
+            r = requests.get(URL)
+            new_set += r.json()['sets']
+
+            params = json.dumps(
+                {'theme': theme_name, 'pageSize': 500, 'pageNumber': 2})
+            URL = f'https://brickset.com/api/v3.asmx/{method}?apiKey={API_KEY}&userHash={USER_HASH}&params={params}'
+            r = requests.get(URL)
+            new_set += r.json()['sets']
+            ic(theme_name, len(new_set))
+
+            new_sets.append(new_set)
+
+    with open('sets.json', 'w') as f:
+        f.write(json.dumps(new_sets))
 
 
 def create_df():
     sets = []
 
-    sets_by_theme = load_sets()[:10]
+    sets_by_theme = load_sets()[:5]
     for theme in sets_by_theme:
-        for set_ in theme:
-            sets.append(set_)
+        for lego_set in theme:
+            sets.append(lego_set)
+            print(lego_set)
 
     df = pd.DataFrame(sets)
     df['licensed'] = df['name'].apply(lambda x: x in LICENSED)
