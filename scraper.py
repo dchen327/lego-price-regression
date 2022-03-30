@@ -114,12 +114,12 @@ def create_df():
     for theme in sets_by_theme:
         for lego_set in theme:
             sets.append(lego_set)
-            print(lego_set)
 
     df = pd.DataFrame(sets)
     df['licensed'] = df['name'].apply(lambda x: x in LICENSED)
 
     print(df.head())
+    df.to_csv('sets.csv')
 
 
 create_df()
