@@ -118,7 +118,10 @@ def create_df():
     df = pd.DataFrame(sets)
     df['licensed'] = df['name'].apply(lambda x: x in LICENSED)
 
-    print(df.head())
+    df = df.drop(columns=['numberVariant', 'barcode', 'themeGroup', 'subtheme',
+                          'category', 'released', 'image', 'bricksetURL', 'collection', 'collections', 'rating', 'reviewCount', 'instructionsCount', 'additionalImageCount', 'barcode', 'extendedData', 'lastUpdated'])
+
+    ic(len(df.columns), df.columns)
     df.to_csv('sets.csv')
 
 
