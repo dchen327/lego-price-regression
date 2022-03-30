@@ -125,4 +125,7 @@ def create_df():
     df.to_csv('sets.csv')
 
 
-create_df()
+# create_df()
+
+df = pd.read_csv('sets.csv')
+print(df.columns)
