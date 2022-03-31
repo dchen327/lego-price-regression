@@ -128,4 +128,8 @@ def create_df():
 # create_df()
 
 df = pd.read_csv('sets.csv')
-print(df.columns)
+print(df.head())
+legocom_str = df.iloc[0]['LEGOCom']
+# convert to dict (replace single to double quotes)
+legocom_dict = json.loads(legocom_str.replace("'", '"'))
+print(json.loads(legocom_str.replace("'", '"')))
