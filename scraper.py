@@ -137,12 +137,14 @@ def create_df():
     # drop where ageRange = {}
     df = df[df['ageRange'] != {}]
 
+    # min age, if not provided set to 1
+    df['minAge'] = df['ageRange'].apply(lambda x: x.get('min', 1))
     df.to_csv('sets.csv')
 
 
-# create_df()
+create_df()
 
 
 df = pd.read_csv('sets.csv')
 ic(len(df), df.columns)
-print(df['ageRange'].value_counts())
+print(df['minAge'].value_counts())
