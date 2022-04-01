@@ -139,5 +139,5 @@ create_df()
 
 df = pd.read_csv('sets.csv')
 ic(df.columns)
-ic(df['ageRange'].count('{}'))
+ic(df['ageRange'].value_counts()['{}'])
 # print(df['ageRange'].value_counts())
