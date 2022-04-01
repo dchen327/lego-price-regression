@@ -24,3 +24,5 @@ Theme grouped categories here: https://brickset.com/browse/sets
 - Drop where no price, no pieces
 - Use min age only, set min age to 1 if not provided (1 datapoint)
 - Replace NaNs in minifigs with 0
+- Packaging category types: Box, Foil pack, Polybag, Blister pack, Other
+  - grouped a lot of packaging types with low counts into Other
