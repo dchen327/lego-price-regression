@@ -173,8 +173,8 @@ reg_df.to_csv('processed.csv', index=False)
 reg_df = pd.read_csv('processed.csv')
 
 
-explanatory_variables = ['year', 'pieces', 'minifigs', 'minAge', 'Package_Foil', 'Package_Other',
-                         'Package_Polybag']
+explanatory_variables = ['year', 'pieces', 'minifigs', 'minAge',
+                         'Package_Foil', 'Package_Polybag', 'Package_Other', ]
 
 # Statsmodel regress retailPrice on year, pieces, minifigs, minAge, packagingType, licensed
 regression = 'retailPrice ~ ' + ' + '.join(explanatory_variables)
