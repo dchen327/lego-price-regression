@@ -147,4 +147,4 @@ create_df()
 
 df = pd.read_csv('sets.csv')
 ic(len(df), df.columns)
-print(df['minAge'].value_counts())
+print(df['minifigs'].value_counts())
