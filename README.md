@@ -31,5 +31,4 @@ in pulling from the API, cleaning, and organizing into pandas
   - dummy variables for everything except box (n-1 dummy variables for n categories)
   
 # STATA
-- `reg retailPrice year pieces minifigs minAge Package_Box Package_Foil Package_Other
-                         Package_Polybag`
+- ` reg retailPrice year pieces minifigs minAge Package_Foil Package_Polybag Package_Other`
