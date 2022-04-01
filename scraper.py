@@ -154,5 +154,10 @@ create_df()
 df = pd.read_csv('sets.csv')
 ic(len(df), df.columns)
 
+# add dummies to regression df for packaging type
+reg_df = df.copy()
+reg_df = pd.get_dummies(
+    df, columns=['packagingType'], prefix='', prefix_sep='', drop_first=True)
+print(reg_df.head())
+
 # Statsmodel regress retailPrice on year, pieces, minifigs, minAge, packagingType, licensed
-ic(df['packagingType'].value_counts())
