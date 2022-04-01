@@ -139,6 +139,12 @@ def create_df():
 
     # min age, if not provided set to 1
     df['minAge'] = df['ageRange'].apply(lambda x: x.get('min', 1))
+
+    # packaging types
+    df['packagingType'] = df['packagingType'].apply(lambda x: x if x in [
+        'Box', 'Foil pack', 'Polybag', 'Blister pack'
+    ] else 'Other')
+
     df.to_csv('sets.csv')
 
 
