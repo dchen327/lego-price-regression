@@ -21,3 +21,6 @@ Theme grouped categories here: https://brickset.com/browse/sets
 # API data pulling
 - separate by date to get all data per page?
 - get rid of GEAR (keychains/accessories), Duplo (pieces too big), Books (not Legos), Collectable Minifigures, Service Packs (motors, etc.)
+- Drop where no price, no pieces
+- Use min age only, set min age to 1 if not provided (1 datapoint)
+- Replace NaNs in minifigs with 0
