@@ -107,10 +107,15 @@ def grab_missing_data():
         f.write(json.dumps(new_sets))
 
 
+def retail_price(legocom_dict):
+    # legocom_dict = json.loads(legocom_str.replace("'", '"'))
+    return legocom_dict.get('US').get('retailPrice')
+
+
 def create_df():
     sets = []
 
-    sets_by_theme = load_sets()[:5]
+    sets_by_theme = load_sets()
     for theme in sets_by_theme:
         for lego_set in theme:
             sets.append(lego_set)
@@ -121,25 +126,18 @@ def create_df():
     df = df.drop(columns=['numberVariant', 'barcode', 'themeGroup', 'subtheme',
                           'category', 'released', 'image', 'bricksetURL', 'collection', 'collections', 'rating', 'reviewCount', 'instructionsCount', 'additionalImageCount', 'barcode', 'extendedData', 'lastUpdated'])
 
-    ic(len(df.columns), df.columns)
-    df.to_csv('sets.csv')
+    df['retailPrice'] = df['LEGOCom'].apply(retail_price)
+    print(df.head())
+    df = df.dropna(subset=['retailPrice'])
+    df = df.drop(columns='LEGOCom')
+
+    # df.to_csv('sets.csv')
 
 
-# create_df()
-
-def retail_price(legocom_str):
-    legocom_dict = json.loads(legocom_str.replace("'", '"'))
-    return legocom_dict.get('US').get('retailPrice')
+create_df()
 
 
 df = pd.read_csv('sets.csv')
-print(df.head())
-# legocom_str = df.iloc[0]['LEGOCom']
-# convert to dict (replace single to double quotes)
-# legocom_dict = json.loads(legocom_str.replace("'", '"'))
-# print(legocom_dict.get('US').get('retailPrice'))
-
-# df = df[retail_price(df['LEGOCom']) is not None]
-df['hasPrice'] = df['LEGOCom'].apply(retail_price)
-df = df.dropna(subset=['hasPrice'])
-print(df.head)
+ic(df.columns)
+ic(df['ageRange'].count('{}'))
+# print(df['ageRange'].value_counts())
