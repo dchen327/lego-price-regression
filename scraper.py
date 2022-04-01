@@ -128,10 +128,13 @@ def create_df():
 
     df['retailPrice'] = df['LEGOCom'].apply(retail_price)
     # print(df.head())
-    df = df.dropna(subset=['retailPrice'])
+    df = df.dropna(subset=['retailPrice', 'pieces'])
     df = df.drop(columns='LEGOCom')
 
-    # df.to_csv('sets.csv')
+    # assume NaN minifigs is 0 minifigs
+    df['minifigs'] = df['minifigs'].fillna(0)
+
+    df.to_csv('sets.csv')
 
 
 create_df()
@@ -139,5 +142,7 @@ create_df()
 
 df = pd.read_csv('sets.csv')
 ic(df.columns)
-ic(df['ageRange'].value_counts()['{}'])
+# ic(df['ageRange'].value_counts()['{}'])
+for col in df.columns:
+    ic(col, df[col].isna().sum())
 # print(df['ageRange'].value_counts())
