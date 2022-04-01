@@ -26,3 +26,7 @@ Theme grouped categories here: https://brickset.com/browse/sets
 - Replace NaNs in minifigs with 0
 - Packaging category types: Box, Foil pack, Polybag, Blister pack, Other
   - grouped a lot of packaging types with low counts into Other
+  
+# STATA
+- `reg retailPrice year pieces minifigs minAge Package_Box Package_Foil Package_Other
+                         Package_Polybag`
