@@ -127,7 +127,7 @@ def create_df():
                           'category', 'released', 'image', 'bricksetURL', 'collection', 'collections', 'rating', 'reviewCount', 'instructionsCount', 'additionalImageCount', 'barcode', 'extendedData', 'lastUpdated'])
 
     df['retailPrice'] = df['LEGOCom'].apply(retail_price)
-    print(df.head())
+    # print(df.head())
     df = df.dropna(subset=['retailPrice'])
     df = df.drop(columns='LEGOCom')
 
