@@ -3,6 +3,8 @@
 
 # Notes
 Theme grouped categories here: https://brickset.com/browse/sets
+- In total this data took around 10 hours to get and parse, because of annoyances
+in pulling from the API, cleaning, and organizing into pandas
 
 # Independent Variables (predicting price)
 - piece count
