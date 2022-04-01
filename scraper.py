@@ -127,9 +127,19 @@ def create_df():
 
 # create_df()
 
+def retail_price(legocom_str):
+    legocom_dict = json.loads(legocom_str.replace("'", '"'))
+    return legocom_dict.get('US').get('retailPrice')
+
+
 df = pd.read_csv('sets.csv')
 print(df.head())
-legocom_str = df.iloc[0]['LEGOCom']
+# legocom_str = df.iloc[0]['LEGOCom']
 # convert to dict (replace single to double quotes)
-legocom_dict = json.loads(legocom_str.replace("'", '"'))
-print(json.loads(legocom_str.replace("'", '"')))
+# legocom_dict = json.loads(legocom_str.replace("'", '"'))
+# print(legocom_dict.get('US').get('retailPrice'))
+
+# df = df[retail_price(df['LEGOCom']) is not None]
+df['hasPrice'] = df['LEGOCom'].apply(retail_price)
+df = df.dropna(subset=['hasPrice'])
+print(df.head)
