@@ -2,6 +2,8 @@ import json
 import requests
 from icecream import ic
 import pandas as pd
+import statsmodels.formula.api as sm
+
 
 # pulled from set categories
 LICENSED = ['Avatar The Last Airbender', 'Batman', 'Brick Sketches', 'BrickHeadz', 'Cars', 'DC Comics Super Heroes', 'DC Super Hero Girls', 'Disney', 'Galidor', 'Ghostbusters', 'Harry Potter', 'Horizon', 'Indiana Jones', 'Jurassic World', 'Marvel Super Heroes', 'Minecraft', 'Minions: The Rise of Gru', 'Mixels', 'Overwatch', 'Pirates of the Caribbean', 'Prince of Persia', 'Scooby-Doo',
@@ -141,7 +143,7 @@ def create_df():
     df['minAge'] = df['ageRange'].apply(lambda x: x.get('min', 1))
 
     # packaging types
-    df['packagingType'] = df['packagingType'].apply(lambda x: x if x in [
+    df['packagingType'] = df['packagingType'].apply(lambda x: x.split()[0] if x in [
         'Box', 'Foil pack', 'Polybag', 'Blister pack'
     ] else 'Other')
 
@@ -152,12 +154,31 @@ create_df()
 
 
 df = pd.read_csv('sets.csv')
-ic(len(df), df.columns)
 
 # add dummies to regression df for packaging type
 reg_df = df.copy()
 reg_df = pd.get_dummies(
-    df, columns=['packagingType'], prefix='', prefix_sep='', drop_first=True)
-print(reg_df.head())
+    df, columns=['packagingType'], prefix='Package', drop_first=True)
+
+# first column is unused set numbers, drop it
+reg_df = reg_df.iloc[:, 1:]
+
+reg_df.to_csv('processed.csv', index=False)
+
+
+reg_df = pd.read_csv('processed.csv')
+
+
+explanatory_variables = ['year', 'pieces', 'minifigs', 'minAge', 'Package_Box', 'Package_Foil', 'Package_Other',
+                         'Package_Polybag']
 
 # Statsmodel regress retailPrice on year, pieces, minifigs, minAge, packagingType, licensed
+regression = 'retailPrice ~ ' + ' + '.join(explanatory_variables)
+res = sm.ols(formula=regression, data=reg_df).fit()
+
+print(res.summary())
+
+reg_df = reg_df.drop(columns='name')
+
+
+reg_df.to_stata('legos.dta')
