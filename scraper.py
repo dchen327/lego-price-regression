@@ -160,6 +160,10 @@ reg_df = df.copy()
 reg_df = pd.get_dummies(
     df, columns=['packagingType'], prefix='Package', drop_first=True)
 
+print(reg_df.columns)
+# we need n-1 dummies, so assume box is default and add dummies for the rest
+reg_df = reg_df.drop(columns=['Package_Box'])
+
 # first column is unused set numbers, drop it
 reg_df = reg_df.iloc[:, 1:]
 
@@ -169,7 +173,7 @@ reg_df.to_csv('processed.csv', index=False)
 reg_df = pd.read_csv('processed.csv')
 
 
-explanatory_variables = ['year', 'pieces', 'minifigs', 'minAge', 'Package_Box', 'Package_Foil', 'Package_Other',
+explanatory_variables = ['year', 'pieces', 'minifigs', 'minAge', 'Package_Foil', 'Package_Other',
                          'Package_Polybag']
 
 # Statsmodel regress retailPrice on year, pieces, minifigs, minAge, packagingType, licensed
@@ -178,7 +182,7 @@ res = sm.ols(formula=regression, data=reg_df).fit()
 
 print(res.summary())
 
-reg_df = reg_df.drop(columns='name')
+reg_df = reg_df.drop(columns=['name'])
 
 
 reg_df.to_stata('legos.dta')
