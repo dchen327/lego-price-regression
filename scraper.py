@@ -188,10 +188,14 @@ with open('cpi.txt', 'r') as f:
     for line in f.read().splitlines():
         date, cpi = line.split('\t')
         year = int(date[:4])
-        cpi = int(cpi)
+        cpi = float(cpi)
         year_to_cpi[year] = cpi
 
+reg_df['adjPrice'] = reg_df.apply(
+    lambda row: row.retailPrice / year_to_cpi[row.year], axis=1)
+
 reg_df = reg_df.drop(columns=['name'])
+print(reg_df.head())
 
 
 reg_df.to_stata('legos.dta')
