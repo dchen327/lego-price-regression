@@ -183,7 +183,13 @@ res = sm.ols(formula=regression, data=reg_df).fit()
 print(res.summary())
 
 # cpi stuff
-
+year_to_cpi = {}
+with open('cpi.txt', 'r') as f:
+    for line in f.read().splitlines():
+        date, cpi = line.split('\t')
+        year = int(date[:4])
+        cpi = int(cpi)
+        year_to_cpi[year] = cpi
 
 reg_df = reg_df.drop(columns=['name'])
 
