@@ -182,6 +182,9 @@ res = sm.ols(formula=regression, data=reg_df).fit()
 
 print(res.summary())
 
+# cpi stuff
+
+
 reg_df = reg_df.drop(columns=['name'])
 
 
